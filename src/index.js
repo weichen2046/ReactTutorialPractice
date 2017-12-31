@@ -44,6 +44,7 @@ class Game extends React.Component {
             ],
             xIsNext: true,
             stepNumber: 0,
+            isAscending: true,
         }
     }
 
@@ -87,6 +88,9 @@ class Game extends React.Component {
                 </li>
             );
         });
+        if (!this.state.isAscending) {
+            moves.reverse();
+        }
 
         let status;
         if (winner) {
@@ -104,8 +108,17 @@ class Game extends React.Component {
                     <div>{status}</div>
                     <ol>{moves}</ol>
                 </div>
+                <div>
+                    <button onClick={() => this.toggleSortOrdering()}>Toggle moves sort direction</button>
+                </div>
             </div>
         );
+    }
+
+    toggleSortOrdering() {
+        this.setState({
+            isAscending: !this.state.isAscending,
+        })
     }
 }
 
